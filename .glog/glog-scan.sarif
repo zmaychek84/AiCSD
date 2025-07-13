@@ -1,0 +1,81 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-f3744d16-680f-4d9e-816c-0cb50633f850",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Potential Binding Across All Interfaces\" vulnerability occurs when a network service is configured to listen on all available network interfaces, typically by binding to the IP address `0.0.0.0`. This can expose the service to unintended network segments, increasing the risk of unauthorized access or attacks. In Python, this vulnerability can arise when using libraries like `socket` or web frameworks that allow specifying the host address.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, configure the service to bind only to specific, trusted network interfaces. This limits exposure to only those interfaces that are necessary for the application's functionality. Additionally, consider implementing network-level access controls, such as firewalls, to further restrict access.\n\n### Source Code Fix Recommendation\n\nIn the provided code example, the service is binding to `0.0.0.0`, which listens on all interfaces. To fix this, replace `0.0.0.0` with a specific IP address that represents the intended network interface, such as `127.0.0.1` for local-only access or a specific internal IP address.\n\n```python\n# Original code\nhostName = \"0.0.0.0\"\n\n# Fixed code\nhostName = \"127.0.0.1\"  # or another specific IP address\n```\n\n### Library Dependencies\n\nThe code example provided does not include any specific library dependencies. However, if this code is part of a larger application, ensure that all necessary libraries are installed and up-to-date. Common libraries for network services in Python include:\n\n- `socket`\n- `flask` (for web applications)\n- `django` (for web applications)\n- `asyncio` (for asynchronous network operations)\n\n### Relevant OWASP Resources\n\n- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)\n- [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-200: Exposure of Sensitive Information to an Unauthorized Actor](https://cwe.mitre.org/data/definitions/200.html)\n- [CWE-284: Improper Access Control](https://cwe.mitre.org/data/definitions/284.html)\n\nThese links are valid and accessible to anonymous users as of the time of this writing."
+              },
+              "properties": {
+                "tags": [
+                  "B104"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-f3744d16-680f-4d9e-816c-0cb50633f850",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Possible binding to all interfaces."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "geti-pipeline/example_code/demo.py"
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 12,
+                  "endLine": 18,
+                  "endColumn": 21,
+                  "snippet": {
+                    "text": "hostName = \"0.0.0.0\"\n"
+                  }
+                },
+                "contextRegion": {
+                  "startLine": 17,
+                  "endLine": 19,
+                  "snippet": {
+                    "text": "\nhostName = \"0.0.0.0\"\nserverPort = 8080\n"
+                  }
+                }
+              }
+            }
+          ],
+          "properties": {
+            "issue_severity": "MEDIUM",
+            "issue_confidence": "MEDIUM"
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
